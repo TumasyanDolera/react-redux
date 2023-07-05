@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import classes from './tasks.module.css';
 import PropTypes from 'prop-types';
 
@@ -50,10 +50,18 @@ export default class Tasks extends PureComponent {
                 </ListGroup>
                 <Card.Body>
                     <Button
+                        className='m-2'
                         disabled={disabledButton}
                         variant="danger"
                         onClick={() => handleRemoveSingleTask(item.id)}>
                         <FontAwesomeIcon icon={faTrash} />
+                    </Button>
+                    <Button
+                        className='m-2'
+                        disabled={disabledButton}
+                        variant="warning"
+                        onClick={()=>alert('Edit Button')}>
+                        <FontAwesomeIcon icon={faEdit} />
                     </Button>
 
                 </Card.Body>
