@@ -27,7 +27,7 @@ export default class Tasks extends PureComponent {
 
     }
     render() {
-        const { item, handleRemoveSingleTask, disabledButton } = this.props;
+        const { item, handleRemoveSingleTask, disabledButton,handleEditTask } = this.props;
         const { isChecked } = this.state;
 
         return (
@@ -46,7 +46,6 @@ export default class Tasks extends PureComponent {
                 <ListGroup className="list-group-flush">
                     <ListGroup.Item>{item.importance}</ListGroup.Item>
                     <ListGroup.Item>{item.developer}</ListGroup.Item>
-                    {/* <ListGroup.Item>Vestibulum at eros</ListGroup.Item> */}
                 </ListGroup>
                 <Card.Body>
                     <Button
@@ -59,8 +58,8 @@ export default class Tasks extends PureComponent {
                     <Button
                         className='m-2'
                         disabled={disabledButton}
-                        variant="warning"
-                        onClick={()=>alert('Edit Button')}>
+                        variant="info"
+                        onClick={()=>handleEditTask(item)}>
                         <FontAwesomeIcon icon={faEdit} />
                     </Button>
 

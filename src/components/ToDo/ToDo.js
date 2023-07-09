@@ -2,22 +2,16 @@ import React, { PureComponent } from "react";
 import AddNewTask from "../AddNewTask/AddNewTask";
 import Tasks from "../Tasks/Tasks";
 import Confirm from "../Confirm";
-import { idGenerator } from '../../utils/utils'
 import { Container, Row, Col, Button } from "react-bootstrap";
+import EditModal from "../EditModal";
 
 
 
 
 export default class ToDo extends PureComponent {
     state = {
-        toDoList: [{
-            id: idGenerator(),
-            title: 'test',
-            description: 'HELLO WORLD',
-            importance: 'HIGH',
-            developer: 'Aksana'
-        }],
-
+        toDoList: [],
+        editedTask:null,
         checkedTasks: new Set(),
         toggleConfirmModal: false
     };
@@ -96,12 +90,30 @@ export default class ToDo extends PureComponent {
 
     }
 
+    handleEditTask =(taskObj)=>{
+        this.setState({
+            editedTask:taskObj,
+        })
+    }
 
+handleSaveEditedTask =(taskObj)=>{
+    let toDoList = [...this.state.toDoList];
 
+    let index  = toDoList.findIndex((item)=>item.id === taskObj.id);
+    toDoList[index] = {
+        ...toDoList[index],
+        ...taskObj
+    }
 
+    this.setState({
+        toDoList,
+        editedTask:null
+    })
+
+}
 
     render() {
-        const { toDoList, checkedTasks, toggleConfirmModal } = this.state;
+        const { toDoList, checkedTasks, toggleConfirmModal , editedTask} = this.state;
 
 
 
@@ -124,6 +136,7 @@ export default class ToDo extends PureComponent {
                                         handleRemoveSingleTask={this.handleRemoveSingleTask}
                                         handleCheckedTasks={this.handleCheckedTasks}
                                         disabledButton={checkedTasks.size}
+                                        handleEditTask={this.handleEditTask}
                                     />
                                 </Col>
                             )
@@ -145,6 +158,14 @@ export default class ToDo extends PureComponent {
                     handleRemovedCheckedTasks={this.handleRemovedCheckedTasks}
                     count={checkedTasks.size}
                 />
+                {
+                    !!editedTask && 
+                    <EditModal 
+                    onClose={()=>this.handleEditTask(null)}
+                    editTaskData={editedTask}
+                    onSave={this.handleSaveEditedTask}
+                    />
+                }
             </Container>
         )
     }
