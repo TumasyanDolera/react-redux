@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import AddNewTask from "../AddNewTask/AddNewTask";
+import AddNewTaskModal from "../AddNewTask/AddNewTask";
 import Tasks from "../Tasks/Tasks";
 import Confirm from "../Confirm";
 import { Container, Row, Col, Button } from "react-bootstrap";
@@ -11,21 +11,63 @@ import EditModal from "../EditModal";
 export default class ToDo extends PureComponent {
     state = {
         toDoList: [],
-        editedTask:null,
+        editedTask: null,
         checkedTasks: new Set(),
-        toggleConfirmModal: false
+        toggleConfirmModal: false,
+        showNewTaskModal: false,
     };
 
+    componentDidMount() {
+        fetch('http://localhost:3004/tasks', {
+            method: 'GET',
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw response.error
+                }
+                return response.json()
+            })
+            .then(tasks => {
+                let toDoList = [...this.state.toDoList, ...tasks];
+                // toDoList.push(tasks);
+                this.setState({
+                    toDoList,
+                })
+            })
+            .catch(error => console.log(error))
+
+    }
 
 
     handleAddTask = (neweObj) => {
+        console.log('NNNNNN====>>>>', neweObj)
         let toDoList = [...this.state.toDoList];
-        toDoList.push(neweObj);
-        this.setState({
-            toDoList,
 
+        fetch('http://localhost:3004/tasks', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(neweObj)
         })
+            .then(response => {
+                if (!response.ok) {
+                    throw response.error
+                }
+                return response.json()
+            })
+            .then(task => {
+                toDoList.push(task);
+                this.setState({
+                    toDoList,
+                    showNewTaskModal: false
 
+                })
+            })
+            .catch(error => console.log(error))
 
     }
 
@@ -90,40 +132,51 @@ export default class ToDo extends PureComponent {
 
     }
 
-    handleEditTask =(taskObj)=>{
+    handleEditTask = (taskObj) => {
         this.setState({
-            editedTask:taskObj,
+            editedTask: taskObj,
         })
     }
 
-handleSaveEditedTask =(taskObj)=>{
-    let toDoList = [...this.state.toDoList];
+    handleSaveEditedTask = (taskObj) => {
+        let toDoList = [...this.state.toDoList];
 
-    let index  = toDoList.findIndex((item)=>item.id === taskObj.id);
-    toDoList[index] = {
-        ...toDoList[index],
-        ...taskObj
+        let index = toDoList.findIndex((item) => item.id === taskObj.id);
+        toDoList[index] = {
+            ...toDoList[index],
+            ...taskObj
+        }
+
+        this.setState({
+            toDoList,
+            editedTask: null
+        })
+
     }
 
-    this.setState({
-        toDoList,
-        editedTask:null
-    })
-
-}
+    toggleNewTaskModal = () => {
+        this.setState({
+            showNewTaskModal: !this.state.showNewTaskModal,
+        })
+    }
 
     render() {
-        const { toDoList, checkedTasks, toggleConfirmModal , editedTask} = this.state;
+        const { toDoList, checkedTasks, toggleConfirmModal, editedTask, showNewTaskModal } = this.state;
 
 
 
         return (
             <Container fluid>
                 <Row className="justify-content-center">
-                    <AddNewTask
-                        handleAddTask={this.handleAddTask}
-                        disabledButton={checkedTasks.size}
-                    />
+                    <Col className="text-center mt-5">
+                        <Button
+                            variant="info"
+                            className="w-25"
+                            onClick={this.toggleNewTaskModal}
+                            disabled={checkedTasks.size}>
+                            Add task
+                        </Button>
+                    </Col>
                 </Row>
 
                 <Row className="mt-5">
@@ -159,11 +212,18 @@ handleSaveEditedTask =(taskObj)=>{
                     count={checkedTasks.size}
                 />
                 {
-                    !!editedTask && 
-                    <EditModal 
-                    onClose={()=>this.handleEditTask(null)}
-                    editTaskData={editedTask}
-                    onSave={this.handleSaveEditedTask}
+                    !!editedTask &&
+                    <EditModal
+                        onClose={() => this.handleEditTask(null)}
+                        editTaskData={editedTask}
+                        onSave={this.handleSaveEditedTask}
+                    />
+                }
+                {
+                    showNewTaskModal &&
+                    <AddNewTaskModal
+                        handleAddTask={this.handleAddTask}
+                        onClose={this.toggleNewTaskModal}
                     />
                 }
             </Container>

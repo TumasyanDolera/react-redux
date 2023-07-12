@@ -1,0 +1,69 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "tasks": [
+    {
+      "title": "First Task",
+      "description": "kjndfvk;jadsnvkfds",
+      "importance": "high",
+      "developer": "Hovo",
+      "id": 1
+    },
+    {
+      "title": "khbvkfkhvf",
+      "description": "k;nkvjvfv",
+      "importance": "medium",
+      "developer": "Hovo",
+      "id": 2
+    },
+    {
+      "title": ";kjdv;asdjv",
+      "description": ";kj ddcvkj;adsnvjkdasfv",
+      "importance": "medium",
+      "developer": "Vardges",
+      "id": 3
+    },
+    {
+      "title": "kjnjnjfv",
+      "description": "kj f vnf vfv",
+      "importance": "medium",
+      "developer": "Aksana",
+      "id": 4
+    },
+    {
+      "title": "kjdnvjfvnf",
+      "description": "kjj vkjaf vkjfvf",
+      "importance": "high",
+      "developer": "Hovo",
+      "id": 5
+    },
+    {
+      "title": "kjnvjfngvjfnv",
+      "description": "kj vkjfnvjkfnvf",
+      "importance": "high",
+      "developer": "Hovo",
+      "id": 6
+    }
+  ]
+}
