@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import classes from './tasks.module.css';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 
 
@@ -38,7 +39,11 @@ export default class Tasks extends PureComponent {
                     type="checkbox"
                 />
                 <Card.Body>
-                    <Card.Title>{item.title}</Card.Title>
+                    <Card.Title>
+                        <Link to={`/task/${item.id}`}>
+                        {item.title}
+                        </Link>
+                        </Card.Title>
                     <Card.Text>
                         {item.description}
                     </Card.Text>

@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
-import AddNewTaskModal from "../AddNewTask/AddNewTask";
-import Tasks from "../Tasks/Tasks";
-import Confirm from "../Confirm";
+import AddNewTaskModal from "../../AddNewTask/AddNewTask";
+import Tasks from "../../Tasks/Tasks";
+import Confirm from "../../Confirm";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import EditModal from "../EditModal";
+import EditModal from "../../EditModal";
 
 
 
@@ -43,7 +43,6 @@ export default class ToDo extends PureComponent {
 
 
     handleAddTask = (neweObj) => {
-        console.log('NNNNNN====>>>>', neweObj)
         let toDoList = [...this.state.toDoList];
 
         fetch('http://localhost:3004/tasks', {
@@ -74,11 +73,25 @@ export default class ToDo extends PureComponent {
     handleRemoveSingleTask = (taskId) => {
         let toDoList = [...this.state.toDoList];
 
-        toDoList = toDoList.filter(item => taskId !== item.id)
-
-        this.setState({
-            toDoList,
+        fetch(`http://localhost:3004/tasks/${taskId}`, {
+            method: 'DELETE',
         })
+            .then(response => {
+                if (!response.ok) {
+                    throw response.error
+                }
+                return response.json()
+            })
+            .then(task => {
+                console.log('RRRRR------>>>>', task)
+                toDoList = toDoList.filter(item => taskId !== item.id)
+
+                this.setState({
+                    toDoList,
+                })
+            })
+            .catch(error => console.log(error))
+
 
     }
 
@@ -141,16 +154,35 @@ export default class ToDo extends PureComponent {
     handleSaveEditedTask = (taskObj) => {
         let toDoList = [...this.state.toDoList];
 
-        let index = toDoList.findIndex((item) => item.id === taskObj.id);
-        toDoList[index] = {
-            ...toDoList[index],
-            ...taskObj
-        }
-
-        this.setState({
-            toDoList,
-            editedTask: null
+        fetch(`http://localhost:3004/tasks/${taskObj.id}`, {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(taskObj)
         })
+            .then(response => {
+                if (!response.ok) {
+                    throw response.error
+                }
+                return response.json()
+            })
+            .then(task => {
+                let index = toDoList.findIndex((item) => item.id === taskObj.id);
+                toDoList[index] = {
+                    ...toDoList[index],
+                    ...taskObj
+                }
+
+                this.setState({
+                    toDoList,
+                    editedTask: null
+                })
+            })
+            .catch(error => console.log(error))
+
+
+
 
     }
 
@@ -184,7 +216,7 @@ export default class ToDo extends PureComponent {
 
                         toDoList.map((item) => {
                             return (
-                                <Col key={item.id}>
+                                <Col key={item.id} sm="12" md="6" lg="4" xl="3">
                                     <Tasks item={item}
                                         handleRemoveSingleTask={this.handleRemoveSingleTask}
                                         handleCheckedTasks={this.handleCheckedTasks}
