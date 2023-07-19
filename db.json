@@ -1,0 +1,41 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "tasks": [
+    {
+      "title": "kjnjnjfv",
+      "description": "kj f vnf vfv",
+      "importance": "medium",
+      "developer": "Aksana",
+      "id": 4
+    },
+    {
+      "id": 5,
+      "title": "0000000000000000",
+      "description": "0000000000000000",
+      "importance": "high",
+      "developer": "Aksana"
+    }
+  ]
+}

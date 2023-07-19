@@ -5,19 +5,13 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import { idGenerator } from '../../utils/utils';
-import PropTypes from 'prop-types';
 
 
-class AddNewTaskModal extends PureComponent {
+class EditModal extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            toDoList: [],
-            title: '',
-            description: '',
-            importance: '',
-            developer: '',
+            ...props.editTaskData
         }
     }
 
@@ -37,32 +31,39 @@ class AddNewTaskModal extends PureComponent {
         })
     }
 
-    handleAddTask = (event) => {
+    handleAddEditedTask = (event) => {
         event.preventDefault();
 
-        const { title, description, importance, developer } = this.state;
+        const { id,title, description, importance, developer } = this.state;
         if (!title || !description || !importance || !developer) {
 
             return;
         }
 
         let neweObj = {
-            // id: idGenerator(),
+            id: id,
             title,
             description,
             importance,
             developer,
         }
 
-        this.props.handleAddTask(neweObj);
+        this.props.onSave(neweObj);
 
-        let toDoList = [...this.state.toDoList];
-        toDoList.push(neweObj);
+        // let toDoList = [...this.state.toDoList];
+        // toDoList.push(neweObj);
+        // this.setState({
+        //     toDoList,
+        //     title: '',
+        //     description: '',
+        //     importance: '',
+        //     developer: '',
+        // })
     }
 
     handleAddKeyDown = (event) => {
         if (event.key === "Enter") {
-            this.handleAddTask(event)
+            this.handleAddEditedTask(event)
         }
 
     }
@@ -71,6 +72,7 @@ class AddNewTaskModal extends PureComponent {
         const { title, developer, importance, description } = this.state;
         return (
             <Modal
+                // {...this.props}
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
@@ -94,20 +96,22 @@ class AddNewTaskModal extends PureComponent {
                             </Col>
                         </Form.Group>
 
-                        <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword" >
+                        <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword" onChange={this.handleInputChange}>
                             <Form.Label column sm={2}>
                                 Description
                             </Form.Label>
                             <Col sm={10}>
-
+                                <FloatingLabel
+                                    controlId="floatingTextarea"
+                                    label="Description"
+                                    className="mb-3"
+                                >
                                     <Form.Control
-                                        controlId="floatingTextarea"
                                         as="textarea"
                                         placeholder="Leave a comment here"
                                         name="description"
-                                        value={description} 
-                                        onChange={this.handleInputChange}
-                                        />
+                                        value={description} />
+                                </FloatingLabel>
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} className="mb-3">
@@ -164,8 +168,8 @@ class AddNewTaskModal extends PureComponent {
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant='primary' onClick={this.handleAddTask}>Add</Button>
-                    <Button variant="secondary" onClick={this.props.onClose}>Cansel</Button>
+                    <Button variant='primary' onClick={this.handleAddEditedTask}>Confirm</Button>
+                    <Button variant="secondary" onClick={this.props.onClose}>Close</Button>
                 </Modal.Footer>
             </Modal>
         );
@@ -174,11 +178,4 @@ class AddNewTaskModal extends PureComponent {
 }
 
 
-
-AddNewTaskModal.propTypes = {
-    handleAddTask:PropTypes.func,
-    onClose:PropTypes.func
-}
-
-
-export default AddNewTaskModal;
+export default EditModal;

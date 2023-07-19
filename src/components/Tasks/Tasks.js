@@ -4,9 +4,10 @@ import { Button } from "react-bootstrap";
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import classes from './tasks.module.css';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 
 
@@ -27,7 +28,7 @@ export default class Tasks extends PureComponent {
 
     }
     render() {
-        const { item, handleRemoveSingleTask, disabledButton } = this.props;
+        const { item, handleRemoveSingleTask, disabledButton,handleEditTask } = this.props;
         const { isChecked } = this.state;
 
         return (
@@ -38,7 +39,11 @@ export default class Tasks extends PureComponent {
                     type="checkbox"
                 />
                 <Card.Body>
-                    <Card.Title>{item.title}</Card.Title>
+                    <Card.Title>
+                        <Link to={`/task/${item.id}`}>
+                        {item.title}
+                        </Link>
+                        </Card.Title>
                     <Card.Text>
                         {item.description}
                     </Card.Text>
@@ -46,14 +51,21 @@ export default class Tasks extends PureComponent {
                 <ListGroup className="list-group-flush">
                     <ListGroup.Item>{item.importance}</ListGroup.Item>
                     <ListGroup.Item>{item.developer}</ListGroup.Item>
-                    {/* <ListGroup.Item>Vestibulum at eros</ListGroup.Item> */}
                 </ListGroup>
                 <Card.Body>
                     <Button
+                        className='m-2'
                         disabled={disabledButton}
                         variant="danger"
                         onClick={() => handleRemoveSingleTask(item.id)}>
                         <FontAwesomeIcon icon={faTrash} />
+                    </Button>
+                    <Button
+                        className='m-2'
+                        disabled={disabledButton}
+                        variant="info"
+                        onClick={()=>handleEditTask(item)}>
+                        <FontAwesomeIcon icon={faEdit} />
                     </Button>
 
                 </Card.Body>
