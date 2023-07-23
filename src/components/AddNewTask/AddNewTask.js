@@ -1,11 +1,9 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import { idGenerator } from '../../utils/utils';
 import PropTypes from 'prop-types';
 
 
@@ -19,6 +17,13 @@ class AddNewTaskModal extends PureComponent {
             importance: '',
             developer: '',
         }
+
+        this.titleRef = createRef()
+
+    }
+
+    componentDidMount(){
+        this.titleRef.current.focus();
     }
 
 
@@ -47,7 +52,6 @@ class AddNewTaskModal extends PureComponent {
         }
 
         let neweObj = {
-            // id: idGenerator(),
             title,
             description,
             importance,
@@ -79,7 +83,7 @@ class AddNewTaskModal extends PureComponent {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        Edit task
+                        Add new task
                     </Modal.Title>
 
                 </Modal.Header>
@@ -90,7 +94,14 @@ class AddNewTaskModal extends PureComponent {
                                 Title
                             </Form.Label>
                             <Col sm={10}>
-                                <Form.Control type="text" placeholder="Title" name="title" value={title} onChange={this.handleInputChange} />
+                                <Form.Control 
+                                    type="text" 
+                                    placeholder="Title" 
+                                    name="title" 
+                                    value={title} 
+                                    onChange={this.handleInputChange}
+                                    ref={this.titleRef}
+                                     />
                             </Col>
                         </Form.Group>
 

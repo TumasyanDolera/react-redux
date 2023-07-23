@@ -5,6 +5,8 @@ import Confirm from "../../Confirm";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import EditModal from "../../EditModal";
 
+const REACT_APP_URL_API = process.env.REACT_APP_URL_API;
+
 
 
 
@@ -18,7 +20,7 @@ export default class ToDo extends PureComponent {
     };
 
     componentDidMount() {
-        fetch('http://localhost:3004/tasks', {
+        fetch(`${REACT_APP_URL_API}/tasks`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -32,7 +34,6 @@ export default class ToDo extends PureComponent {
             })
             .then(tasks => {
                 let toDoList = [...this.state.toDoList, ...tasks];
-                // toDoList.push(tasks);
                 this.setState({
                     toDoList,
                 })
@@ -45,7 +46,7 @@ export default class ToDo extends PureComponent {
     handleAddTask = (neweObj) => {
         let toDoList = [...this.state.toDoList];
 
-        fetch('http://localhost:3004/tasks', {
+        fetch(`${REACT_APP_URL_API}/tasks`, {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
@@ -73,7 +74,7 @@ export default class ToDo extends PureComponent {
     handleRemoveSingleTask = (taskId) => {
         let toDoList = [...this.state.toDoList];
 
-        fetch(`http://localhost:3004/tasks/${taskId}`, {
+        fetch(`${REACT_APP_URL_API}/tasks/${taskId}`, {
             method: 'DELETE',
         })
             .then(response => {
@@ -83,7 +84,6 @@ export default class ToDo extends PureComponent {
                 return response.json()
             })
             .then(task => {
-                console.log('RRRRR------>>>>', task)
                 toDoList = toDoList.filter(item => taskId !== item.id)
 
                 this.setState({
@@ -154,7 +154,7 @@ export default class ToDo extends PureComponent {
     handleSaveEditedTask = (taskObj) => {
         let toDoList = [...this.state.toDoList];
 
-        fetch(`http://localhost:3004/tasks/${taskObj.id}`, {
+        fetch(`${REACT_APP_URL_API}/tasks/${taskObj.id}`, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json",
