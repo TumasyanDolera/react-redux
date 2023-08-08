@@ -6,29 +6,15 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from 'react-router-dom';
 
 
+
+
 export default function NavBar() {
     return (
-        <Navbar expand="lg" className="bg-body-tertiary">
-            <Container>
-                <Navbar.Brand >
-                    <Link to={'/'}>
-                        ToDo
-                    </Link>
-                </Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
-
-                        <Link to="/">
-                            Home
-                        </Link>
-                            <Link to="/about">
-                                About
-                            </Link>
-                    </Nav>
-                </Navbar.Collapse>
-            </Container>
-        </Navbar>
+     <nav className='nav'>
+    <Link id='Home' to="/About">About Us</Link>
+    <Link id='About'to="/">Home</Link>
+    <div id='logo'></div>
+    </nav>
 
     )
 }

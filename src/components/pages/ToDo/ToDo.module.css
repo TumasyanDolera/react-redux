@@ -1,0 +1,28 @@
+body{
+    
+    background-image: url( https://www.atypicalfinance.com/wp-content/uploads/2018/10/Homepage-background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+}
+
+.Add{
+    margin-left:87%;
+    margin-top: 290px;
+    color: lightblue;
+    background-color: rgba(128, 128, 128, 0);
+    border: none;
+    font-size: 40px;
+    }
+.Add:hover{
+    transition: 1s;
+    color: white;
+}
+.delete{
+    width: 150px !important;
+}
+ 
+
+
+  
+  

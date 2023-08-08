@@ -20,3 +20,54 @@
 .checkedTaskCard {
   border: 2px solid red !important;
 }
+.header{
+  background-color: darkgrey !important;
+}
+.body{
+  background-color: lightgray !important;
+  border-color: lightgray !important;
+  
+}
+.footer{
+  background-color: darkgrey !important;
+}
+.description{
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif!important;
+  color: black;
+  margin-right:200px ;
+}
+.startData{
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif!important;
+  background-color: lightgray !important;
+  border-color: lightgray !important;
+}
+.finishData{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif!important;
+  background-color: lightgray !important;
+  border-color: lightgray !important;
+}
+.developer{
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif!important;
+  background-color: lightgray !important;
+  border-color: lightgray !important;
+}
+.importance{
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif!important;
+  background-color: lightgray !important;
+  border-color: lightgray !important;
+}
+.radio{
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif!important;
+  background-color: lightgray !important;
+  border-color: lightgray !important;
+}
+.title{
+  color: black !important;
+  margin-left: 18px;
+  text-decoration: none;
+}
+.button{
+  background-color: gray !important;
+  border: none !important;
+}
+

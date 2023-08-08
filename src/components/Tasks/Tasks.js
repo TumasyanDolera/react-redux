@@ -1,5 +1,4 @@
-import React, { PureComponent } from 'react';
-
+import React, { useState } from 'react';
 import { Button } from "react-bootstrap";
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -9,75 +8,70 @@ import classes from './tasks.module.css';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+export default function Tasks ({item, handleRemoveSingleTask, disabledButton, handleEditTask, handleCheckedTasks}) {
+    const[isChecked, setIsChecked] = useState(false)
 
-
-export default class Tasks extends PureComponent {
-    state = {
-        isChecked: false
+    function toggleCheckbox  (id) {
+        handleCheckedTasks(id);
+        setIsChecked(!isChecked)
     }
 
-
-
-    toggleCheckbox = (id) => {
-        this.props.handleCheckedTasks(id);
-
-        this.setState({
-
-            isChecked: !this.state.isChecked
-        })
-
-    }
-    render() {
-        const { item, handleRemoveSingleTask, disabledButton,handleEditTask } = this.props;
-        const { isChecked } = this.state;
-
-        return (
-            <Card className={`${classes.card} ${isChecked ? classes.checkedTaskCard : ''}`}>
+     return (
+        <Card className={`${classes.card} ${isChecked ? classes.checkedTaskCard : ''}`}>
+            <Card.Header className={classes.header}>
                 <input
-                    onChange={() => this.toggleCheckbox(item.id)}
+                    onChange={() => 
+                       toggleCheckbox(item.id)
+                    }
                     className={`${classes.cardCeckbox} m-2`}
                     type="checkbox"
                 />
-                <Card.Body>
-                    <Card.Title>
-                        <Link to={`/task/${item.id}`}>
-                        {item.title}
-                        </Link>
-                        </Card.Title>
-                    <Card.Text>
-                        {item.description}
-                    </Card.Text>
-                </Card.Body>
-                <ListGroup className="list-group-flush">
-                    <ListGroup.Item>{item.importance}</ListGroup.Item>
-                    <ListGroup.Item>{item.developer}</ListGroup.Item>
+            </Card.Header>
+            <Card.Body className={classes.body}>
+                <Card.Title  >
+                    <Link to={`/task/${item.id}`} className={classes.title}>
+                        Title: {item.title}
+                    </Link>
+                </Card.Title>
+                <Card.Text className={classes.description}>
+                    Description: {item.description}
+                </Card.Text>
+                <ListGroup className={classes.body}>
+                    <ListGroup.Item className={classes.startData}>StartData: {item.startData}</ListGroup.Item>
+                    <ListGroup.Item className={classes.finishData}>FinishData: {item.endData}</ListGroup.Item>
+                    <ListGroup.Item className={classes.importance}>Importance: {item.importance}</ListGroup.Item>
+                    <ListGroup.Item className={classes.developer}>Developer: {item.developer}</ListGroup.Item>
                 </ListGroup>
-                <Card.Body>
-                    <Button
-                        className='m-2'
-                        disabled={disabledButton}
-                        variant="danger"
-                        onClick={() => handleRemoveSingleTask(item.id)}>
-                        <FontAwesomeIcon icon={faTrash} />
-                    </Button>
-                    <Button
-                        className='m-2'
-                        disabled={disabledButton}
-                        variant="info"
-                        onClick={()=>handleEditTask(item)}>
-                        <FontAwesomeIcon icon={faEdit} />
-                    </Button>
+            </Card.Body>
 
-                </Card.Body>
-            </Card>
-        )
-    }
+            <Card.Footer className={classes.footer}>
+                <Button
+                    className='m-2'
+                    disabled={disabledButton}
+                    variant="danger"
+                    onClick={() => 
+                        handleRemoveSingleTask(item.id)
+                        }>
+                    <FontAwesomeIcon icon={faTrash} />
+                </Button>
+                <Button
+                    className={classes.button}
+                    disabled={disabledButton}
+                    onClick={() => 
+                        handleEditTask(item)
+                        }>
+                    <FontAwesomeIcon icon={faEdit} />
+                </Button>
+
+            </Card.Footer>
+        </Card>
+    )
 }
-
 
 Tasks.propType = {
     item: PropTypes.object,
     handleRemoveSingleTask: PropTypes.func,
     handleCheckedTasks: PropTypes.func,
-    disabledButton: PropTypes.number,
-}
+    disabledButton: PropTypes.number,}
+
+

@@ -4,69 +4,70 @@ import Modal from 'react-bootstrap/Modal';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
-import classes from "./AddNewTask.module.css";
+import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import classes from './EditModal.module.css'
 
 
+export default function EditModal ({editTaskData, onClose, handlePostAddTask}) {
+    const [newTaskObj, setNewTaskObj] = useState(editTaskData)
 
- function AddNewTaskModal ({ handlePostAddTask, onClose}) {
-    const [newTaskObj, setNewTaskObj] = useState({
-          
-            title: null,
-            description: null,
-            startData: null,
-            endData: null,
-            importance: null,
-            developer: null,
-        })
-        console.log(newTaskObj)
 
-    
-    function handleInputChange (event)  {
-        setNewTaskObj({  ...newTaskObj, [event.target.name]: event.target.value })
+   function handleInputChange (event)  {
+        setNewTaskObj({[event.target.name]: event.target.value })
 
     }
 
     function handleRadioChange  (event) {
-        setNewTaskObj({  ...newTaskObj, importance: event.target.name })
+        setNewTaskObj({ importance: event.target.name })
     }
 
     function handleSelectChange  (event)  {
-        setNewTaskObj({ ...newTaskObj, developer: event.target.value})
+        setNewTaskObj({ developer: event.target.value})
     }
 
-    function handleAddTask  (event)  {
+    function handleAddEditedTask(event)  {
         event.preventDefault();
 
-        const { title, description, importance, developer, startData, endData } = newTaskObj;
-        if (!title || !description || !importance || !developer || !startData || !endData) {
+        const { id,title, description, importance, developer, startData, finishData } = newTaskObj;
+        if (!title || !description || !importance || !developer || !startData || !finishData) {
 
             return;
         }
-        
-        handlePostAddTask(newTaskObj);
-        onClose();
-       
-    }
+
+        let newObj = {
+            id: id,
+            title,
+            description,
+            importance,
+            developer,
+            startData,
+            finishData,
+        }
+
+        handlePostAddTask(newObj);
+        onClose()
     
 
-    function handleAddKeyDown(event) {
-        if (event.key === "Enter") {
-            handleAddTask(event)
-        }
     }
- return (
+
+    function handleAddKeyDown  (event) {
+        if (event.key === "Enter") {
+            handleAddEditedTask(event)
+        }
+
+    }
+        return (
             <Modal
-                className= {classes.modal}
+                
                 size="lg"
                 aria-labelledby="contained-modal-title-vcenter"
                 centered
                 show={true}
                 onHide={onClose}
-                
             >
                 <Modal.Header closeButton className= {classes.header}>
                     <Modal.Title className= {classes.title}>
-                         NEW TASK
+                        Edit Task
                     </Modal.Title>
 
                 </Modal.Header>
@@ -76,73 +77,53 @@ import classes from "./AddNewTask.module.css";
                             <Form.Label column sm={2} className= {classes.title1}>
                                 Title
                             </Form.Label>
-                            <Col sm={10} >
-                                <Form.Control 
-                                    type="text" 
-                                    placeholder="Title" 
-                                    name="title" 
-                                    value={newTaskObj.title} 
-                                    onChange={handleInputChange}
-                                    
-                                     />
+                            <Col sm={10}>
+                                <Form.Control type="text" placeholder="Title" name="title" value={newTaskObj.title} onChange={handleInputChange} />
                             </Col>
                         </Form.Group>
-
-                        <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword" >
+                        <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword" onChange={handleInputChange}>
                             <Form.Label column sm={2} className={classes.description}>
                                 Description
                             </Form.Label>
+                            
                             <Col sm={10}>
-
-                                    <Form.Control 
-                                        controlId="floatingTextarea"
+                                <FloatingLabel
+                                    controlId="floatingTextarea"
+                                    label="Description"
+                                    className="mb-3"
+                                >
+                                    <Form.Control
                                         as="textarea"
                                         placeholder="Leave a comment here"
                                         name="description"
-                                        value={newTaskObj.description} 
-                                        onChange={handleInputChange}
-                                        />
+                                        value={newTaskObj.description} />
+                                </FloatingLabel>
                             </Col>
-                        </Form.Group>
-                        <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword" >
+                        
+                        <Form.Group as={Row} className="mb-3">
+                            
+                            </Form.Group>
+                            <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
                             <Form.Label column sm={2} className={classes.startData}>
                                 Start
                             </Form.Label>
                             <Col sm={10}>
-
-                                    <Form.Control 
-                                        controlId="floatingTextarea"
-                                        type = "date"
-                                        placeholder="L"
-                                        name="startData"
-                                        value={newTaskObj.startData} 
-                                        onChange={handleInputChange}
-                                        />
+                                <Form.Control type="date"  name="startData" value={newTaskObj.startData} onChange={handleInputChange} />
                             </Col>
                         </Form.Group>
-                        <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword" >
+                        <Form.Group as={Row} className="mb-3" controlId="formHorizontalEmail">
                             <Form.Label column sm={2} className={classes.finishData}>
-                                Finis
+                                Finish
                             </Form.Label>
                             <Col sm={10}>
-
-                                    <Form.Control
-                                        controlId="floatingTextarea"
-                                        type = "date"
-                                        placeholder=""
-                                        name="endData"
-                                        value={newTaskObj.endData} 
-                                        onChange={handleInputChange}
-                                        />
+                                <Form.Control type="date"  name="endData" value={newTaskObj.endData} onChange={handleInputChange} />
                             </Col>
                         </Form.Group>
-                        <Form.Group as={Row} className="mb-3">
-                            <Form.Label as="legend" column sm={2} className={classes.developer}>
+                        <Form.Label as="legend" column sm={2} className={classes.developer}>
                                 Developer
                             </Form.Label>
-
                             <Col sm={10}>
-                                <Form.Select aria-label="Default select example" value={newTaskObj.developerdeveloper} onChange={handleSelectChange}>
+                                <Form.Select aria-label="Default select example" value={newTaskObj.developer} onChange={handleSelectChange}>
                                     <option value="">Select a developer</option>
                                     <option value="Aksana">Aksana</option>
                                     <option value="Hovo">Hovo</option>
@@ -154,7 +135,7 @@ import classes from "./AddNewTask.module.css";
                             </Col>
                         </Form.Group>
                         <fieldset>
-                            <Form.Group as={Row} className="mb-3" >
+                            <Form.Group as={Row} className="mb-3">
                                 <Form.Label as="legend" column sm={2} className={classes.radio}>
                                     Radios
                                 </Form.Label>
@@ -172,7 +153,7 @@ import classes from "./AddNewTask.module.css";
                                         label="medium"
                                         name="medium"
                                         id="formHorizontalRadios2"
-                                        checked={newTaskObj.importance === "medium"}
+                                        checked={ newTaskObj.importance === "medium"}
                                         onChange={handleRadioChange}
 
                                     />
@@ -191,16 +172,12 @@ import classes from "./AddNewTask.module.css";
                     </Form>
                 </Modal.Body>
                 <Modal.Footer className= {classes.footer}>
-                    <Button variant='primary' onClick={handleAddTask}>Add</Button>
-                    <Button variant="secondary" onClick={onClose}>Cansel</Button>
+                    <Button variant='primary' onClick={handleAddEditedTask}>Confirm</Button>
+                    <Button variant="secondary" onClick={onClose}>Close</Button>
                 </Modal.Footer>
             </Modal>
         );
- }
-export default AddNewTaskModal
-
-
-
+    }
 
 
 

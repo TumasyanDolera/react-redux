@@ -1,6 +1,11 @@
-.navbarContainer{
+.navbarnav{
+    background-color: rgb(54,69,79);
     width: 100%;
-    background-color: grey;
-    height: 50px;
-    padding: 20px;
+    height: 100px;
 }
+
+  .nav{
+    background-color: rgb(54,69,79);
+    width: 100%;
+    height: 100px;
+  }

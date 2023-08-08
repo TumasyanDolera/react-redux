@@ -12,7 +12,7 @@ function Confirm(props) {
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                Are you sure to remove {props.count} count of tasks ?
+                Are you sure to remove {props.count} tasks ?
                 </Modal.Title>
             </Modal.Header>
             <Modal.Footer>
