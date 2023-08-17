@@ -12,21 +12,58 @@ export const apiSlice = createApi({
                 
             })
         }),
+        
+        getTask: builder.query({
+            query: (taskId) => ({
+                url: `/tasks/${taskId}`,
+                method: "GET"
+            })
+        }),
         deleteTask: builder.mutation({
             query: (taskId ) => ({
                 url: `/tasks/${taskId}`,
                 method: 'DELETE',
             }),
         }),
-        AddTask: builder.mutation({
-            query: () => ({
-                url:`/tasks/`,
+        createTask:builder.mutation({
+            query: (task) => ({
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
+                url: `/tasks`,
                 method: 'POST',
-                body: 'newTaskObj'
+                body: JSON.stringify(task)
             })
-        })
+        }),
+        putTask:builder.mutation({
+            query: ({id, ...taskObj}) => ({
+                url: `/tasks/${id}`,
+                method: "PUT",
+                body: JSON.stringify(taskObj),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
+            })
+        }),
+        deleteCheckedTasks: builder.mutation({
+            query: (payload)=>({
+                url: '/tasks',
+                method: 'DELETE',
+                body:JSON.stringify({ids:payload}),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8',
+                },
+            })
+        }),
+        getSingleTask: builder.query({
+            query: (taskId) => ({
+                url: `/tasks/${taskId}`,
+                method: "GET"
+            })
+        }),
+        
     }),
 })
 
 
-export const {useGetAllTasksQuery, useDeleteTaskMutation, useAddTaskMutation} = apiSlice;
+export const {useGetSingleTaskQuery, useGetAllTasksQuery, useDeleteTaskMutation, useCreateTaskMutation, useGetTaskQuery, usePutTaskMutation, useDeleteCheckedTasksMutation} = apiSlice;

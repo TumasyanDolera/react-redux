@@ -1,7 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    toDoList: []
+    toDoList: [],
+    editTaskObj: null,
+    checkedTasks:[],
+ 
 }
 const taskSlice = createSlice({
     name: 'tasks',
@@ -15,15 +18,37 @@ const taskSlice = createSlice({
             state.toDoList =  state.toDoList.filter(item => action.payload !== item.id)
         },
         
-        addSingleTask(state, action){
-            state.toDoList =  state.toDoList.filter(item => action.payload !== item.id)
-        }
+        createTask(state, action) {
+            state.toDoList = [...state.toDoList, action.payload]
+        },
 
+        putTask(state,action){
+            let index = state.toDoList.findIndex((item) => item.id === action.payload.data.id);
+            state.toDoList[index] = action.payload.data;
+        },
+        getEditTask(state, action) {
+            state.editTaskObj = action.payload
+        },
+        saveCheckedTasks(state, action){
+            if(state.checkedTasks.find((item)=>item === action.payload)){
+                state.checkedTasks = state.checkedTasks.filter(item=>item !== action.payload)
+           }
+           else{
+               state.checkedTasks = [...state.checkedTasks, action.payload];
+
+           }
+        },
+
+        cleanCheckedTassk(state){
+            state.checkedTasks = [];
+        },
+     
     }
 
+        
 
-})
+    })
 
 
-export const {getAllTasks,removeSingleTask,addSingleTask} = taskSlice.actions;
+export const {getAllTasks,removeSingleTask,createTask, putTask,getEditTask, saveCheckedTasks, cleanCheckedTassk} = taskSlice.actions;
 export default taskSlice.reducer;

@@ -5,10 +5,13 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import classes from "./AddNewTask.module.css";
+import { createTask} from "../../Redux/Reducer";
+import { useCreateTaskMutation } from "../../Redux/API";
+import { useDispatch } from 'react-redux';
 
-
-
- function AddNewTaskModal ({ handlePostAddTask, onClose}) {
+function AddNewTaskModal ({ onClose, toggleNewTaskModal}) {
+    const dispatch = useDispatch();
+    const [createTaskRequest, response] = useCreateTaskMutation();
     const [newTaskObj, setNewTaskObj] = useState({
           
             title: null,
@@ -18,9 +21,9 @@ import classes from "./AddNewTask.module.css";
             importance: null,
             developer: null,
         })
-        console.log(newTaskObj)
+        
 
-    
+   
     function handleInputChange (event)  {
         setNewTaskObj({  ...newTaskObj, [event.target.name]: event.target.value })
 
@@ -34,27 +37,34 @@ import classes from "./AddNewTask.module.css";
         setNewTaskObj({ ...newTaskObj, developer: event.target.value})
     }
 
-    function handleAddTask  (event)  {
+    const createNewTask = (event) => {
         event.preventDefault();
 
-        const { title, description, importance, developer, startData, endData } = newTaskObj;
+         const { title, description, importance, developer, startData, endData } = newTaskObj;
         if (!title || !description || !importance || !developer || !startData || !endData) {
 
             return;
         }
-        
-        handlePostAddTask(newTaskObj);
-        onClose();
+         createTaskRequest(newTaskObj)
+        .then((task) => {
+            console.log(task)
+            dispatch(createTask(task.data))
+            toggleNewTaskModal(!toggleNewTaskModal)
+            
+        })
+        .catch(error => console.log(error))
        
-    }
+        
+        
+      }
     
 
     function handleAddKeyDown(event) {
         if (event.key === "Enter") {
-            handleAddTask(event)
+            createNewTask(event)
         }
     }
- return (
+ return (  <>
             <Modal
                 className= {classes.modal}
                 size="lg"
@@ -191,12 +201,16 @@ import classes from "./AddNewTask.module.css";
                     </Form>
                 </Modal.Body>
                 <Modal.Footer className= {classes.footer}>
-                    <Button variant='primary' onClick={handleAddTask}>Add</Button>
+                    <Button variant='primary' onClick={createNewTask}>Add</Button>
                     <Button variant="secondary" onClick={onClose}>Cansel</Button>
                 </Modal.Footer>
             </Modal>
+          
+            
+            </>
         );
  }
+ 
 export default AddNewTaskModal
 
 
