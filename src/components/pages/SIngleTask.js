@@ -10,16 +10,17 @@ import classes from './SingleTask.module.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getEditTask, removeSingleTask, saveCheckedTasks } from '../../Redux/Reducer';
 import {  useDeleteTaskMutation, useGetSingleTaskQuery } from '../../Redux/API';
+import { Success, Error, Update } from '../Toastify/Message';
 
 
 
 const REACT_APP_URL_API = process.env.REACT_APP_URL_API;
 
-export default function SingleTask() {
+export default function SingleTask({item}) {
     const [taskData, setTaskData] = useState({});
     const { id } = useParams();
     const navigate = useNavigate();
-    const dispatch = useDispatch;
+    const dispatch = useDispatch();
     const { data } = useGetSingleTaskQuery(id)
     const [deleteSingleTask, result] = useDeleteTaskMutation()
     const editTaskObj = useSelector((state) => state.tasksReducer.editTaskObj)
@@ -35,12 +36,14 @@ export default function SingleTask() {
         .then(() => {
             dispatch(removeSingleTask(taskId))
             navigate('/')
+            Success()
         })
-        .catch((err) => console.log(err))
+        .catch(() => { Error() })
     }
- const handleEditTask = (taskData) => {
-    dispatch(getEditTask(taskData))
- }
+//  const handleEditTask = (taskData) => {
+//     dispatch(getEditTask(taskData))
+//  }
+
  return (
      <>
         {
@@ -62,7 +65,7 @@ export default function SingleTask() {
                     </Button>
                     <Button
                     className={classes.buttonEdit}
-                    onClick={() => {handleEditTask(taskData)}}>
+                    onClick={() => dispatch(getEditTask(taskData))}>
                     <FontAwesomeIcon icon={faEdit} />
                     </Button>
                 </div>

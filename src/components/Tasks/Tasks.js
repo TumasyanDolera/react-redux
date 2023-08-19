@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,12 +10,13 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getEditTask, removeSingleTask, saveCheckedTasks } from '../../Redux/Reducer';
 import { useNavigate } from "react-router";
-import { useDeleteTaskMutation } from '../../Redux/API';
+import { useDeleteTaskMutation } from '../../Redux/API'; 
+import { Success, Error } from '../Toastify/Message';
 
 
 
 
-export default function Tasks ({item, handleShowDeleteButton}) {
+export default function Tasks ({item}) {
     const checkedTasks = useSelector((state)=>state.tasksReducer.checkedTasks);
     console.log(checkedTasks)
     const [isChecked, setIsChecked] = useState(false)
@@ -32,8 +33,11 @@ export default function Tasks ({item, handleShowDeleteButton}) {
         .then(() => {
             dispatch(removeSingleTask(taskId))
             navigate('/')
+            Success()
         })
-        .catch((err) => console.log(err))
+        .catch(() => {
+            Error()
+        })
     }
     
 

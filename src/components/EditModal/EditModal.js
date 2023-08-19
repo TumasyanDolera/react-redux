@@ -9,6 +9,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import classes from './EditModal.module.css';
+import { Update, Error } from '../Toastify/Message';
 
 export default function EditModal({ }) {
     const [sendPutTask] = usePutTaskMutation();
@@ -36,8 +37,11 @@ export default function EditModal({ }) {
             .then((res) => {
                 dispatch(putTask(res))
                 dispatch(getEditTask(null))
+                Update()
             })
-            .catch(error => console.log(error))
+            .catch(() => {
+                Error()
+            })
     }
 
     function handleAddKeyDown(event) {

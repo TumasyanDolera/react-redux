@@ -5,6 +5,9 @@ import NavBar from './components/NavBar/NavBar';
 import { Route, Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AboutUs from './components/pages/About';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Toastify from './components/Toastify/Toastify';
 
 
 
@@ -13,6 +16,7 @@ import AboutUs from './components/pages/About';
 function App() {
   return (
     <div className="mainDiv">
+      <Toastify />
       <NavBar />
       <Routes>
         <Route path="/" element={<ToDo />} />
