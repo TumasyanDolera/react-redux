@@ -21,7 +21,25 @@ body{
 .delete{
     width: 150px !important;
 }
- 
+ .Search{
+    width: 70%;
+    height: 40px;
+    background-color: rgb(54,69,79);
+    color: lightblue;
+    width: 20%;
+}
+
+.Search1{
+   margin-top: -330px;
+   display: flex;
+   justify-content: end;
+ }
+.result{
+    display: flex;
+    justify-content: end;
+    color: white;
+    text-decoration: none;
+}
 
 
   

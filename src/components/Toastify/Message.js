@@ -28,7 +28,7 @@ function Error() {
 
 }
 function Update() {
-    toast.success('Tasky has been update !!!', {
+    toast.success('Task has been update !!!', {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,
@@ -40,4 +40,17 @@ function Update() {
         });
 
 }
-export {Success,Error,Update}
+function Add() {
+    toast.success('Task added successfully!!!', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+
+}
+export {Success, Error, Update, Add}

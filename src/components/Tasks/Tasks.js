@@ -13,9 +13,6 @@ import { useNavigate } from "react-router";
 import { useDeleteTaskMutation } from '../../Redux/API'; 
 import { Success, Error } from '../Toastify/Message';
 
-
-
-
 export default function Tasks ({item}) {
     const checkedTasks = useSelector((state)=>state.tasksReducer.checkedTasks);
     console.log(checkedTasks)

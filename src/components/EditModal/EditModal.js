@@ -28,7 +28,7 @@ export default function EditModal({ }) {
     }
 
     function handleSelectChange(event) {
-        setNewTaskObj({ ...newTaskObj, developer: event.target.value })
+        setNewTaskObj({ ...newTaskObj, developer: event.target.name })
     }
 
     const handleAddEditedTask = () => {

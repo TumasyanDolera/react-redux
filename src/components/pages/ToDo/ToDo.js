@@ -5,16 +5,19 @@ import Confirm from "../../Confirm";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import EditModal from "../../EditModal/EditModal";
 import classes from './ToDo.module.css';
-import {useGetAllTasksQuery} from "../../../Redux/API";
+import {useGetAllTasksQuery, useSearchTaskQuery} from "../../../Redux/API";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllTasks } from "../../../Redux/Reducer";
 import Loading from "../../Loading/Loading";
-
+import { useDebounce } from "../../../utils/customHook";
+import SearchTask from "../../../utils/search";
 
 const REACT_APP_URL_API = process.env.REACT_APP_URL_API;
 
 export default function ToDo({}){
-    
+       const [searchText, setSearchText] = useState('');
+       const debounced = useDebounce(searchText)
+       const { data: searchResults } = useSearchTaskQuery(debounced);
        const toDoList = useSelector((state)=>state.tasksReducer.toDoList);
        const editTaskObj = useSelector((state)=>state.tasksReducer.editTaskObj)
        const checkedTasks = useSelector((state)=>state.tasksReducer.checkedTasks);
@@ -22,12 +25,8 @@ export default function ToDo({}){
        let [showNewTaskModal, setShowNewTaskModal] = useState(false)
        const { data,isLoading } = useGetAllTasksQuery();
        const dispatch = useDispatch();
-    //    const[showDeleteButton, setShowdeleteButton] = useState(false)
+       const[showDeleteButton, setShowdeleteButton] = useState(false)
    
-    
-      
-
-
        useEffect(() => {
         if (data) {
             dispatch(getAllTasks(data));
@@ -37,7 +36,12 @@ export default function ToDo({}){
         
  function handleToggleShowCofirmModal () {
            setToggleConfirmModal(!toggleConfirmModal)
+           
     }
+    function handleDeleteButton () {
+        setShowdeleteButton(!showDeleteButton)
+        
+ }
 
    function tooggleHide ()  {
         
@@ -45,15 +49,16 @@ export default function ToDo({}){
     
     }
 
-
-     function toggleNewTaskModal(){
+    function toggleNewTaskModal(){
         
             setShowNewTaskModal (!showNewTaskModal)
     
      }
+     const handleSearchChange = (event) => {
+        setSearchText(event.target.value)
+    }
    
-
-      return (
+        return (
                <>
                { isLoading && <Loading />}
                <Container fluid>
@@ -68,9 +73,23 @@ export default function ToDo({}){
                         </button    >
                     </Col>
                 </Row>
-                
-
-                <Row className="mt-5">
+                <div className="justify-content-center">
+                   <div className={classes.Search1}>
+                        <input className={classes.Search}
+                        type="search" 
+                        placeholder="Search"
+                        value={searchText} 
+                        onChange={handleSearchChange} />
+                    </div>
+                </div>
+                {
+                    searchResults && <div className="justify-content-center">
+                        <div className={classes.result}>
+                            <SearchTask  tasks={searchResults}  />
+                        </div>
+                    </div>
+                }
+                 <Row className="mt-5">
                     {
 
                         toDoList.map((item) => {
@@ -85,13 +104,14 @@ export default function ToDo({}){
                     }
                 </Row>
                
-                    {/* { showDeleteButton && */}
+                    { showDeleteButton && 
                      <Button className={classes.delete}
                         onClick={handleToggleShowCofirmModal}
                         variant="danger"
                         disabled={checkedTasks.length < 0}
+                        handleDeleteButton={checkedTasks.length >= 0}
                     >DELETE</Button>
-                    {/* } */}
+                    }
 
                 
                 

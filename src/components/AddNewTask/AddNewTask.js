@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Col from 'react-bootstrap/Col';
@@ -8,8 +8,10 @@ import classes from "./AddNewTask.module.css";
 import { createTask} from "../../Redux/Reducer";
 import { useCreateTaskMutation } from "../../Redux/API";
 import { useDispatch } from 'react-redux';
+import { Add } from '../Toastify/Message';
 
 function AddNewTaskModal ({ onClose, toggleNewTaskModal}) {
+    const titleInputRef = useRef();
     const dispatch = useDispatch();
     const [createTaskRequest, response] = useCreateTaskMutation();
     const [newTaskObj, setNewTaskObj] = useState({
@@ -21,6 +23,9 @@ function AddNewTaskModal ({ onClose, toggleNewTaskModal}) {
             importance: null,
             developer: null,
         })
+        useEffect(()=>{
+            titleInputRef.current.focus();
+        },[])
         
 
    
@@ -49,10 +54,13 @@ function AddNewTaskModal ({ onClose, toggleNewTaskModal}) {
         .then((task) => {
             console.log(task)
             dispatch(createTask(task.data))
+            Add()
             toggleNewTaskModal(!toggleNewTaskModal)
             
         })
-        .catch(error => console.log(error))
+        .catch(() => {
+            Error()
+        })
        
         
         
@@ -91,8 +99,9 @@ function AddNewTaskModal ({ onClose, toggleNewTaskModal}) {
                                     type="text" 
                                     placeholder="Title" 
                                     name="title" 
-                                    value={newTaskObj.title} 
+                                    value={newTaskObj.titleRef}
                                     onChange={handleInputChange}
+                                    ref={titleInputRef}
                                     
                                      />
                             </Col>

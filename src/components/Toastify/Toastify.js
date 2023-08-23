@@ -1,10 +1,7 @@
 
 import { ToastContainer } from 'react-toastify';
 
-
-
-
- function Toastify() {
+function Toastify() {
 
     return (
     
