@@ -1,0 +1,66 @@
+.Ragister {
+    width: 700px;
+    height: 570px;
+    background-color: rgb(54, 69, 79);
+    margin: 0 auto;
+    margin-top: 20px;
+
+}
+.Ragister1{
+    height: 650px;
+}
+
+.Regform {
+    width: 300px;
+    margin: 0 auto;
+
+}
+
+.RegInput {
+    margin: 6px;
+    border-radius: 30px;
+    padding: 10px;
+    width: 300px;
+    background-color: lightgray;
+    border: none;
+
+}
+
+.RegSubmit {
+    border-radius: 30px;
+    width: 60%;
+    background-color: grey;
+    color: white;
+    height: 40px;
+    padding: 5px;
+    margin: 20px;
+    margin-left: 60px;
+
+
+}
+
+.Regh1 { 
+    text-align: center;
+    padding: 15px;
+    color: white;
+
+}
+
+.Regh4 {
+    color:white;
+    text-align: center;
+}
+
+.Regh5 {
+    color: grey;
+    text-align: center;
+
+}
+.Error1{
+    color: red;
+    margin-right: 90px;
+    
+}
+.Error2{
+    border: 2px solid red;
+}

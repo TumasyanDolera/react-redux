@@ -8,9 +8,9 @@ import classes from './tasks.module.css';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getEditTask, removeSingleTask, saveCheckedTasks } from '../../Redux/Reducer';
+import { getEditTask, removeSingleTask, saveCheckedTasks } from '../../Redux/Features/Reducer';
 import { useNavigate } from "react-router";
-import { useDeleteTaskMutation } from '../../Redux/API'; 
+import { useDeleteTaskMutation } from '../../Redux/Services/API'; 
 import { Success, Error } from '../Toastify/Message';
 
 export default function Tasks ({item}) {

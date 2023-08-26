@@ -1,16 +1,16 @@
 import React from 'react';
 import { useParams } from 'react-router';
 import { useEffect, useState } from 'react';
-import EditModal from '../EditModal/EditModal';
+import EditModal from '../../EditModal/EditModal';
 import { useNavigate } from 'react-router-dom';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classes from './SingleTask.module.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { getEditTask, removeSingleTask, saveCheckedTasks } from '../../Redux/Reducer';
-import { useDeleteTaskMutation, useGetSingleTaskQuery } from '../../Redux/API';
-import { Success, Error, Update } from '../Toastify/Message';
+import { getEditTask, removeSingleTask, saveCheckedTasks } from '../../../Redux/Features/Reducer';
+import { useDeleteTaskMutation, useGetSingleTaskQuery } from '../../../Redux/Services/API';
+import { Success, Error, Update } from '../../Toastify/Message';
 
 const REACT_APP_URL_API = process.env.REACT_APP_URL_API;
 

@@ -1,0 +1,59 @@
+.img {
+    width: 220px;
+    height: 100px;
+    background-image: url(https://sylhet.wordcamp.org/2023/files/2023/04/WPDeveloper-e1683809335219.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 180px;
+}
+
+.content {
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(54, 69, 79);
+    width: 50%;
+    height: 500px;
+    margin: 0 auto;
+    margin-top: 50px;
+
+}
+
+.LogInInput {
+    border-radius: 30px;
+    padding: 15px;
+    width: 300px;
+    background-color: lightgray;
+    border: none;
+    margin: 10px;
+}
+
+
+.Submit {
+    border-radius: 30px;
+    width: 60%;
+    background-color: grey;
+    color: white;
+    margin-left: 65px;
+    margin-top: 30px;
+    height: 40px;
+    padding: 5px;
+
+}
+
+.LogInh1 {
+    text-align: center;
+    color: white;
+    padding: 20px;
+
+}
+
+.LogInh5 {
+    text-align: center;
+    padding-top: 20px;
+    color: gray;
+}
+
+.LogInh4 {
+    text-align: center;
+    padding-top: 10px;
+}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { usePutTaskMutation } from '../../Redux/API';
-import { putTask, getEditTask } from '../../Redux/Reducer';
+import { usePutTaskMutation } from '../../Redux/Services/API';
+import { putTask, getEditTask } from '../../Redux/Features/Reducer';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Col from 'react-bootstrap/Col';

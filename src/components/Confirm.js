@@ -2,8 +2,8 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { cleanCheckedTassk, getAllTasks } from '../Redux/Reducer';
-import { useDeleteTaskMutation } from '../Redux/API';
+import { cleanCheckedTassk, getAllTasks } from '../Redux/Features/Reducer';
+import { useDeleteTaskMutation } from '../Redux/Services/API';
 
 function Confirm(props) {
     const checkedTasks = useSelector((state) => state.tasksReducer.checkedTasks);

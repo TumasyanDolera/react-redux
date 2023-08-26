@@ -5,8 +5,8 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import classes from "./AddNewTask.module.css";
-import { createTask} from "../../Redux/Reducer";
-import { useCreateTaskMutation } from "../../Redux/API";
+import { createTask} from "../../Redux/Features/Reducer";
+import { useCreateTaskMutation } from "../../Redux/Services/API";
 import { useDispatch } from 'react-redux';
 import { Add } from '../Toastify/Message';
 

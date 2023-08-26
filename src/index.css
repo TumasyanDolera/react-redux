@@ -88,7 +88,7 @@ p{
   
   width: 130px;
   height: 60px;
-  background-image: url(https://sylhet.wordcamp.org/2023/files/2023/04/WPDeveloper-e1683809335219.png);
+   background-image: url(https://sylhet.wordcamp.org/2023/files/2023/04/WPDeveloper-e1683809335219.png);
    background-repeat: no-repeat;
    background-size: cover;
    margin-left: 80%;
@@ -111,5 +111,5 @@ p{
 .link{
   color: lightblue;
   text-decoration: none;
-  margin-right: 230px;
+  margin-right: 220px;
 }
