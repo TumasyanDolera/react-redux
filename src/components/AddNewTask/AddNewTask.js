@@ -141,7 +141,7 @@ function AddNewTaskModal ({ onClose, toggleNewTaskModal}) {
                         </Form.Group>
                         <Form.Group as={Row} className="mb-3" controlId="formHorizontalPassword" >
                             <Form.Label column sm={2} className={classes.finishData}>
-                                Finis
+                                Finish
                             </Form.Label>
                             <Col sm={10}>
 

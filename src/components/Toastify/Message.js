@@ -53,4 +53,30 @@ function Add() {
         });
 
 }
-export {Success, Error, Update, Add}
+function Login() {
+    toast.success('LogIn successfully!!!', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+
+}
+function Register() {
+    toast.success('you have successfully registered!!!', {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+
+}
+export {Success, Error, Update, Add, Login, Register}

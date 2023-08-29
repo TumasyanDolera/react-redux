@@ -30,9 +30,10 @@ body{
 }
 
 .Search1{
-   margin-top: -330px;
+   margin-top: -420px;
    display: flex;
-   justify-content: end;
+   justify-content: center;
+   
  }
 .result{
     display: flex;

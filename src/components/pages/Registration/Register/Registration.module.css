@@ -6,8 +6,27 @@
     margin-top: 20px;
 
 }
+.eye{
+    display: flex;
+    margin: 6px;
+    border-radius: 30px;
+    width: 300px;
+    background-color: lightgray;
+    border: none;
+    padding: 1px;
+}
+.eye1{
+    display: flex;
+    margin: 6px;
+    margin-top: 13px;
+    border-radius: 30px;
+    width: 300px;
+    background-color: lightgray;
+    border: none;
+    padding: 1px;
+}
 .Ragister1{
-    height: 650px;
+    height: 700px;
 }
 
 .Regform {
@@ -21,6 +40,14 @@
     border-radius: 30px;
     padding: 10px;
     width: 300px;
+    background-color: lightgray;
+    border: none;
+
+}
+.RegInput1 {
+    margin: 6px;
+    border-radius: 30px;
+    width: 400px;
     background-color: lightgray;
     border: none;
 
@@ -62,5 +89,5 @@
     
 }
 .Error2{
-    border: 2px solid red;
+    border: 3px solid red;
 }

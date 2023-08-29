@@ -9,23 +9,30 @@ import 'react-toastify/dist/ReactToastify.css';
 import Toastify from './components/Toastify/Toastify';
 import Registration from './components/pages/Registration/Register/Registration';
 import LogIn from './components/pages/Registration/LogIn/LogIn';
+import { useState } from 'react';
+
 
 function App() {
+  
+  
   return (
     <div className="mainDiv">
-      <Toastify />
+       
       <NavBar />
+      <Toastify />
+     
       <Routes>
         <Route path="/" element={<ToDo />} />
         <Route path="/task/:id"  element={<SingleTask />} />
         <Route path="/about" element={<AboutUs />} />
-        <Route path="/LogIn" element={<LogIn />} />
-        <Route path="/Register" element={<Registration />} />
+        <Route path="/login" element={<LogIn/>} />
+        <Route path="/register" element={<Registration />} />
         <Route path="*" element={<NoFound />} />
       </Routes>
     </div>
+  
 
-  );
+);
 }
 
 export default App;

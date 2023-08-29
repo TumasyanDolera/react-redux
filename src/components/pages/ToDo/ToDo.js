@@ -11,6 +11,8 @@ import { getAllTasks } from "../../../Redux/Features/Reducer";
 import Loading from "../../Loading/Loading";
 import { useDebounce } from "../../../utils/customHook";
 import SearchTask from "../../../utils/search";
+import { useNavigate } from "react-router";
+import { getToken } from "../../../utils/utils";
 
 const REACT_APP_URL_API = process.env.REACT_APP_URL_API;
 
@@ -26,22 +28,21 @@ export default function ToDo({}){
        const { data,isLoading } = useGetAllTasksQuery();
        const dispatch = useDispatch();
        const[showDeleteButton, setShowdeleteButton] = useState(false)
-   
+       const navigate = useNavigate();
+  
        useEffect(() => {
         if (data) {
             dispatch(getAllTasks(data));
         }
+        if(!getToken){
+            navigate('/LogIn')
+        }
     }, [data])
-
         
  function handleToggleShowCofirmModal () {
            setToggleConfirmModal(!toggleConfirmModal)
            
     }
-    function handleDeleteButton () {
-        setShowdeleteButton(!showDeleteButton)
-        
- }
 
    function tooggleHide ()  {
         
@@ -59,7 +60,7 @@ export default function ToDo({}){
     }
    
         return (
-               <>
+            <>
                { isLoading && <Loading />}
                <Container fluid>
                 <Row >
@@ -95,9 +96,7 @@ export default function ToDo({}){
                         toDoList.map((item) => {
                             return (
                                 <Col key={item.id} sm="12" md="6" lg="4" xl="3">
-                                    <Tasks item={item}
-                                        
-                                    />
+                                    <Tasks item={item} />
                                 </Col>
                             )
                         })
@@ -108,13 +107,10 @@ export default function ToDo({}){
                      <Button className={classes.delete}
                         onClick={handleToggleShowCofirmModal}
                         variant="danger"
-                        disabled={checkedTasks.length < 0}
-                        handleDeleteButton={checkedTasks.length >= 0}
-                    >DELETE</Button>
-                    }
-
-                
-                
+                        disabled={checkedTasks.length < 0} >
+                        DELETE</Button>
+                   }
+  
                 <Confirm
                     show={toggleConfirmModal}
                     onHide={tooggleHide}

@@ -15,7 +15,6 @@ import { Success, Error } from '../Toastify/Message';
 
 export default function Tasks ({item}) {
     const checkedTasks = useSelector((state)=>state.tasksReducer.checkedTasks);
-    console.log(checkedTasks)
     const [isChecked, setIsChecked] = useState(false)
     const dispatch = useDispatch()
     const navigate = useNavigate();
@@ -81,7 +80,9 @@ export default function Tasks ({item}) {
                 <Button
                     className={classes.button}
                     disabled={checkedTasks.length > 0}
-                    onClick={() => dispatch(getEditTask(item))}>
+                    onClick={() => dispatch(getEditTask(item)) }
+                    
+                      >
                     <FontAwesomeIcon icon={faEdit} />
                 </Button>
                 </div>

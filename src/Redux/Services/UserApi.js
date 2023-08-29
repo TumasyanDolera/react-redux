@@ -1,10 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 const USER_URL_API = process.env.REACT_APP_URL_API_USER;
+const TEST = process.env.REACT_APP_URL_API_USER
+
 
 export const userApi = createApi({
     reducerPath: 'userApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: `https://reqres.in/api`
+        baseUrl: USER_URL_API
     }),
     endpoints: (bulder) => ({
         registerNewUser: bulder.mutation({

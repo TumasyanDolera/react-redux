@@ -17,6 +17,9 @@
     margin-top: 50px;
 
 }
+.LogIn1{
+    height: 600px;
+}
 
 .LogInInput {
     border-radius: 30px;
@@ -25,6 +28,26 @@
     background-color: lightgray;
     border: none;
     margin: 10px;
+}
+.LogInInput1{
+    margin: 6px;
+    border-radius: 30px;
+    width: 400px;
+    background-color: lightgray;
+    border: none;
+    padding: 8px;
+    
+}
+.eye2{
+        
+        display: flex;
+        margin: 6px;
+        border-radius: 30px;
+        width: 300px;
+        background-color: lightgray;
+        border: none;
+        
+    
 }
 
 
@@ -56,4 +79,11 @@
 .LogInh4 {
     text-align: center;
     padding-top: 10px;
+}
+.Error3{
+    border: 2px solid red;
+}
+.Error4{
+    color: red;
+    margin-right: 90px;
 }

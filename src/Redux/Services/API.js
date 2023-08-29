@@ -10,11 +10,13 @@ export const apiSlice = createApi({
             query: () => ({
                 url: `/tasks`,
                 
+                
             })
         }),
         
         searchTask:builder.query({
-            query:(params)=>`/tasks?q=${params}`
+            query:(params)=>`/tasks?q=${params}`,
+            
         }),
         deleteTask: builder.mutation({
             query: (taskId ) => ({
@@ -29,7 +31,8 @@ export const apiSlice = createApi({
                 },
                 url: `/tasks`,
                 method: 'POST',
-                body: JSON.stringify(task)
+                body: JSON.stringify(task),
+                
             })
         }),
         putTask:builder.mutation({
@@ -42,6 +45,7 @@ export const apiSlice = createApi({
                 },
             }),
             invalidatesTags: ['SingleTask'],
+            
 
         }),
         deleteCheckedTasks: builder.mutation({
