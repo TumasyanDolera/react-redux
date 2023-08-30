@@ -3,13 +3,14 @@ import Modal from 'react-bootstrap/Modal';
 import { memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { cleanCheckedTassk, getAllTasks } from '../Redux/Features/Reducer';
-import { useDeleteTaskMutation } from '../Redux/Services/API';
+import { useDeleteCheckedTasksMutation } from '../Redux/Services/API';
+import { Success, Error } from './Toastify/Message';
 
 function Confirm(props) {
     const checkedTasks = useSelector((state) => state.tasksReducer.checkedTasks);
     const toDoList = useSelector((state) => state.tasksReducer.toDoList);
     const dispatch = useDispatch();
-    const [deleteChackedTask, response] = useDeleteTaskMutation();
+    const [deleteChackedTask, response] = useDeleteCheckedTasksMutation();
 
     const handleRemovedCheckedTasks = () => {
         let newToDoLiST = [...toDoList];
@@ -17,15 +18,13 @@ function Confirm(props) {
             .then((obj) => {
                 checkedTasks.forEach(itemId => {
                     newToDoLiST = newToDoLiST.filter(item => item.id !== itemId)
-                   
-
-                })
+                   });
                 dispatch(getAllTasks(newToDoLiST));
                 dispatch(cleanCheckedTassk());
+                Success()
                 props.onHide();
-
             })
-            .catch((err) => console.log(err));
+            .catch(Error());
     }
     return (
         <Modal
@@ -36,11 +35,11 @@ function Confirm(props) {
         >
             <Modal.Header closeButton>
                 <Modal.Title id="contained-modal-title-vcenter">
-                Are you sure to remove {props.count} tasks ?
+                Are you sure to delete {props.count} tasks ?
                 </Modal.Title>
             </Modal.Header>
             <Modal.Footer>
-                <Button variant='warning' onClick={handleRemovedCheckedTasks}>Confirm</Button>
+                <Button variant='warning' onClick={ handleRemovedCheckedTasks }>Confirm</Button>
                 <Button onClick={props.onHide}>Close</Button>
             </Modal.Footer>
         </Modal>

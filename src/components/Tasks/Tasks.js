@@ -57,9 +57,6 @@ export default function Tasks ({item}) {
                         Title: {item.title}
                     </Link>
                 </Card.Title>
-                <Card.Text className={classes.description}>
-                    Description: {item.description}
-                </Card.Text>
                 <ListGroup className={classes.body}>
                     <ListGroup.Item className={classes.startData}>StartData: {item.startData}</ListGroup.Item>
                     <ListGroup.Item className={classes.finishData}>FinishData: {item.endData}</ListGroup.Item>

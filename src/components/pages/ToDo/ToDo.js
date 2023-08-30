@@ -9,17 +9,13 @@ import {useGetAllTasksQuery, useSearchTaskQuery} from "../../../Redux/Services/A
 import { useDispatch, useSelector } from "react-redux";
 import { getAllTasks } from "../../../Redux/Features/Reducer";
 import Loading from "../../Loading/Loading";
-import { useDebounce } from "../../../utils/customHook";
-import SearchTask from "../../../utils/search";
 import { useNavigate } from "react-router";
 import { getToken } from "../../../utils/utils";
 
 const REACT_APP_URL_API = process.env.REACT_APP_URL_API;
 
 export default function ToDo({}){
-       const [searchText, setSearchText] = useState('');
-       const debounced = useDebounce(searchText)
-       const { data: searchResults } = useSearchTaskQuery(debounced);
+    
        const toDoList = useSelector((state)=>state.tasksReducer.toDoList);
        const editTaskObj = useSelector((state)=>state.tasksReducer.editTaskObj)
        const checkedTasks = useSelector((state)=>state.tasksReducer.checkedTasks);
@@ -27,14 +23,13 @@ export default function ToDo({}){
        let [showNewTaskModal, setShowNewTaskModal] = useState(false)
        const { data,isLoading } = useGetAllTasksQuery();
        const dispatch = useDispatch();
-       const[showDeleteButton, setShowdeleteButton] = useState(false)
        const navigate = useNavigate();
   
        useEffect(() => {
         if (data) {
             dispatch(getAllTasks(data));
         }
-        if(!getToken){
+        if(!getToken()){
             navigate('/LogIn')
         }
     }, [data])
@@ -55,10 +50,7 @@ export default function ToDo({}){
             setShowNewTaskModal (!showNewTaskModal)
     
      }
-     const handleSearchChange = (event) => {
-        setSearchText(event.target.value)
-    }
-   
+  
         return (
             <>
                { isLoading && <Loading />}
@@ -74,22 +66,6 @@ export default function ToDo({}){
                         </button    >
                     </Col>
                 </Row>
-                <div className="justify-content-center">
-                   <div className={classes.Search1}>
-                        <input className={classes.Search}
-                        type="search" 
-                        placeholder="Search"
-                        value={searchText} 
-                        onChange={handleSearchChange} />
-                    </div>
-                </div>
-                {
-                    searchResults && <div className="justify-content-center">
-                        <div className={classes.result}>
-                            <SearchTask  tasks={searchResults}  />
-                        </div>
-                    </div>
-                }
                  <Row className="mt-5">
                     {
 
@@ -103,12 +79,14 @@ export default function ToDo({}){
                     }
                 </Row>
                
-                    { showDeleteButton && 
+                    { 
+                    checkedTasks.length ? 
                      <Button className={classes.delete}
                         onClick={handleToggleShowCofirmModal}
-                        variant="danger"
-                        disabled={checkedTasks.length < 0} >
-                        DELETE</Button>
+                        variant="danger">
+                        DELETE</Button> : null
+
+
                    }
   
                 <Confirm

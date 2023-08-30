@@ -7,12 +7,12 @@ body{
 }
 
 .Add{
-    margin-left:87%;
-    margin-top: 290px;
+    margin-left: 43%;
+    margin-top: 20px;
     color: lightblue;
     background-color: rgba(128, 128, 128, 0);
     border: none;
-    font-size: 40px;
+    font-size: 50px;
     }
 .Add:hover{
     transition: 1s;
@@ -20,26 +20,6 @@ body{
 }
 .delete{
     width: 150px !important;
-}
- .Search{
-    width: 70%;
-    height: 40px;
-    background-color: rgb(54,69,79);
-    color: lightblue;
-    width: 20%;
-}
-
-.Search1{
-   margin-top: -420px;
-   display: flex;
-   justify-content: center;
-   
- }
-.result{
-    display: flex;
-    justify-content: end;
-    color: white;
-    text-decoration: none;
 }
 
 

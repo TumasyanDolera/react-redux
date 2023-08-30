@@ -38,6 +38,9 @@ export default function Registration() {
         if (!name || !surname || !email || !password || !confirmPassword) {
             return;
         }
+        if (RegData.password !== RegData.confirmPassword) {
+            return;
+          }
 
         submitRegData({ name, surname, email, password })
             .then((res => {

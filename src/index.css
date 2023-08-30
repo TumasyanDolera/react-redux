@@ -11,8 +11,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-
 p{
   color: white;
   text-align: center;
@@ -67,8 +65,8 @@ p{
 
 }
 .link{
-  color:blue;
+  color:lightblue;
   text-decoration: none;
-  margin-right: 850px;
+
   
 }

@@ -11,7 +11,8 @@ export const apiSlice = createApi({
                 url: `/tasks`,
                 
                 
-            })
+            }),
+            providesTags: ['AllTask']
         }),
         
         searchTask:builder.query({
@@ -23,6 +24,9 @@ export const apiSlice = createApi({
                 url: `/tasks/${taskId}`,
                 method: 'DELETE',
             }),
+            providesTags: ['SingleTaskDelete'], 
+            invalidatesTags: ['AllTask']
+
         }),
         createTask:builder.mutation({
             query: (task) => ({
@@ -33,7 +37,8 @@ export const apiSlice = createApi({
                 method: 'POST',
                 body: JSON.stringify(task),
                 
-            })
+            }),
+            invalidatesTags: ['AllTask']
         }),
         putTask:builder.mutation({
             query: ({id, ...taskObj}) => ({
@@ -44,10 +49,8 @@ export const apiSlice = createApi({
                     'Content-type': 'application/json; charset=UTF-8',
                 },
             }),
-            invalidatesTags: ['SingleTask'],
-            
-
-        }),
+            invalidatesTags: ['SingleTask', 'AllTask', 'SingleTaskDelete', 'CheckedTaskDelete'],
+            }),
         deleteCheckedTasks: builder.mutation({
             query: (payload)=>({
                 url: '/tasks',
@@ -56,7 +59,8 @@ export const apiSlice = createApi({
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
                 },
-            })
+            }),
+            providesTags: ['CheckedTaskDelete'], 
         }),
         getSingleTask: builder.query({
             query: (id)=> `/tasks/${id}`,
