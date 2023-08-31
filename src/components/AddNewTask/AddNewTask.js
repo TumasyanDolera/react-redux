@@ -161,7 +161,7 @@ function AddNewTaskModal ({ onClose, toggleNewTaskModal}) {
                             </Form.Label>
 
                             <Col sm={10}>
-                                <Form.Select aria-label="Default select example" value={newTaskObj.developerdeveloper} onChange={handleSelectChange}>
+                                <Form.Select aria-label="Default select example" value={newTaskObj.developer} onChange={handleSelectChange}>
                                     <option value="">Select a developer</option>
                                     <option value="Aksana">Aksana</option>
                                     <option value="Hovo">Hovo</option>

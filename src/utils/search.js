@@ -1,6 +1,4 @@
-
 import { Link } from 'react-router-dom';
-
 
 function SearchTask({ tasks }) {
     return (

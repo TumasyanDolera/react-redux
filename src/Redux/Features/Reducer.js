@@ -39,7 +39,7 @@ const taskSlice = createSlice({
            }
         },
 
-        cleanCheckedTassk(state){
+        cleanCheckedTask(state){
             state.checkedTasks = [];
         },
      
@@ -50,5 +50,5 @@ const taskSlice = createSlice({
     })
 
 
-export const {getAllTasks,removeSingleTask,createTask, putTask,getEditTask, saveCheckedTasks, cleanCheckedTassk} = taskSlice.actions;
+export const {getAllTasks,removeSingleTask,createTask, putTask,getEditTask, saveCheckedTasks, cleanCheckedTask} = taskSlice.actions;
 export default taskSlice.reducer;

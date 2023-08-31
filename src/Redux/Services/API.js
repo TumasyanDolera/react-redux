@@ -4,7 +4,7 @@ const BASE_URL = process.env.REACT_APP_URL_API;
 
 export const apiSlice = createApi({
     reducerPath: 'getAllTasks',
-    baseQuery: fetchBaseQuery({ baseUrl: `http://localhost:3004` }),
+    baseQuery: fetchBaseQuery({  baseUrl: `${BASE_URL}` }),
     endpoints: (builder) => ({
         getAllTasks: builder.query({
             query: () => ({
@@ -16,8 +16,7 @@ export const apiSlice = createApi({
         }),
         
         searchTask:builder.query({
-            query:(params)=>`/tasks?q=${params}`,
-            
+            query:(params)=>`/tasks/search?q=${params}`
         }),
         deleteTask: builder.mutation({
             query: (taskId ) => ({
@@ -49,18 +48,19 @@ export const apiSlice = createApi({
                     'Content-type': 'application/json; charset=UTF-8',
                 },
             }),
-            invalidatesTags: ['SingleTask', 'AllTask', 'SingleTaskDelete', 'CheckedTaskDelete'],
+            invalidatesTags: ['SingleTask', 'AllTask', 'SingleTaskDelete'],
             }),
+
         deleteCheckedTasks: builder.mutation({
             query: (payload)=>({
                 url: '/tasks',
                 method: 'DELETE',
-                body:JSON.stringify({ids:payload}),
+                body:JSON.stringify({ ids: payload }),
                 headers: {
                     'Content-type': 'application/json; charset=UTF-8',
                 },
             }),
-            providesTags: ['CheckedTaskDelete'], 
+            invalidatesTags: ['SingleTaskDelete','AllTask'], 
         }),
         getSingleTask: builder.query({
             query: (id)=> `/tasks/${id}`,

@@ -113,21 +113,21 @@ export default function EditModal({ }) {
                                 <Form.Control type="date" name="endData" value={newTaskObj.endData} onChange={handleInputChange} />
                             </Col>
                         </Form.Group>
-                        <Form.Label as="legend" column sm={2} className={classes.developer}>
+                         <Form.Label as="legend" column sm={2} className={classes.developer}>
                             Developer
                         </Form.Label>
                         <Col sm={10}>
-                            <Form.Select aria-label="Default select example" value={newTaskObj.developer} onChange={handleSelectChange}>
-                                <option value="">Select a developer</option>
-                                <option value="Aksana">Aksana</option>
-                                <option value="Hovo">Hovo</option>
-                                <option value="Vardges">Vardges</option>
-                                <option value="Armen">Armen</option>
-                                <option value="ELizabet">Elizabet</option>
-                                <option value="Dolera">Dolera</option>
-                            </Form.Select>
-                        </Col>
-                    </Form.Group>
+                                <Form.Select aria-label="Default select example" value={newTaskObj.developer} onChange={handleSelectChange}>
+                                    <option value="">Select a developer</option>
+                                    <option value="Aksana">Aksana</option>
+                                    <option value="Hovo">Hovo</option>
+                                    <option value="Vardges">Vardges</option>
+                                    <option value="Armen">Armen</option>
+                                    <option value="ELizabet">Elizabet</option>
+                                    <option value="Dolera">Dolera</option>
+                                </Form.Select>
+                            </Col>
+                        </Form.Group>
                     <fieldset>
                         <Form.Group as={Row} className="mb-3">
                             <Form.Label as="legend" column sm={2} className={classes.radio}>

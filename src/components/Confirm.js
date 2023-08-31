@@ -2,7 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { memo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { cleanCheckedTassk, getAllTasks } from '../Redux/Features/Reducer';
+import { cleanCheckedTask, getAllTasks } from '../Redux/Features/Reducer';
 import { useDeleteCheckedTasksMutation } from '../Redux/Services/API';
 import { Success, Error } from './Toastify/Message';
 
@@ -15,17 +15,19 @@ function Confirm(props) {
     const handleRemovedCheckedTasks = () => {
         let newToDoLiST = [...toDoList];
         deleteChackedTask(checkedTasks)
-            .then((obj) => {
+            .then(() => {
                 checkedTasks.forEach(itemId => {
                     newToDoLiST = newToDoLiST.filter(item => item.id !== itemId)
-                   });
+                    })
                 dispatch(getAllTasks(newToDoLiST));
-                dispatch(cleanCheckedTassk());
-                Success()
+                dispatch(cleanCheckedTask());
+                Success();
                 props.onHide();
             })
-            .catch(Error());
-    }
+           
+            .catch(() => {
+                Error()
+    })}
     return (
         <Modal
             {...props}
@@ -39,7 +41,7 @@ function Confirm(props) {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Footer>
-                <Button variant='warning' onClick={ handleRemovedCheckedTasks }>Confirm</Button>
+                <Button variant='warning' onClick={handleRemovedCheckedTasks}>Confirm</Button>
                 <Button onClick={props.onHide}>Close</Button>
             </Modal.Footer>
         </Modal>
