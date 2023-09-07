@@ -32,6 +32,9 @@ export default function LogIn(){
         if(!email || !password){
             return;
         };
+        if (!/\S+@\S+\.\S+/.test(LogInData.email)){
+            return;
+        }
 
         LogIn({password})
         .then((res)=>{
@@ -57,7 +60,7 @@ export default function LogIn(){
                     <p className={classes.Error4}><BiSolidError icon={BiSolidError} />{error.email}</p>
                 }
                 <input className = {`${classes.LogInInput} ${error.email ? classes.Error3 : " "}`}
-                type="email" 
+                type = "email" 
                 name="email"
                 value={LogInData.email} 
                 placeholder="Enter your email"
@@ -74,10 +77,11 @@ export default function LogIn(){
                     value={LogInData.password}
                     placeholder="Enter your Password"
                     onChange={handleRagisterChange} 
-                    /><div className="p-2"onClick={()=>setVisible(!visible)}>
+                    />
+                    <div className="p-2"onClick={()=>setVisible(!visible)}>
                     {visible ? <AiFillEye/> : <AiFillEyeInvisible/>}
                     </div> 
-            </div>
+                  </div>
                 <br/>
                 <input className={classes.Submit}
                 type="submit" 

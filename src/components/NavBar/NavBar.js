@@ -18,42 +18,46 @@ export default function NavBar() {
     const successUser = useSelector(state => state.userReducer.successAuthorization);
     const debounced = useDebounce(searchText)
     const { data: searchResults } = useSearchTaskQuery(debounced);
-    
-    
-    const handleLogOut = () =>{
+
+
+    const handleLogOut = () => {
         dispatch(setAutorization(false));
         removeToken();
-        if(!getToken()){
+        if (!getToken()) {
             navigate('/LogIn')
-        }}
-
-        const handleSearchChange = (event) => {
-            setSearchText(event.target.value)
         }
+    }
 
-    
+    const handleSearchChange = (event) => {
+        setSearchText(event.target.value)
+    }
+
+
     return (
-        
-    <nav className={classes.nav}>
-        
-    <div className={classes.div5}>
-    <div className={classes.logo}id='logo'></div>
-    <Link className={classes.Home}id='Home' to="/About">About Us</Link>
-    <Link className={classes.About}id='About'to="/">Home</Link>
-    </div>
-    <div>
-    <input className={classes.Search}
-      type="search" 
-      placeholder="Search"
-      value={searchText} 
-      onChange= {handleSearchChange} />
-    {
-             searchResults && 
-                         <SearchTask tasks={searchResults}  />
-     }
-     </div>
-       <button className={classes.LogOut}onClick={handleLogOut}> <FaSignOutAlt/> Log out</button>
-   </nav>
+
+        <nav className={classes.nav}>
+
+            <div className={classes.div5}>
+                <div className={classes.logo} id='logo'></div>
+                <Link className={classes.Home} id='Home' to="/About">About Us</Link>
+                <Link className={classes.About} id='About' to="/">Home</Link>
+            </div>
+
+            {
+                searchResults &&
+                <SearchTask tasks={searchResults} />
+            }
+            <input className={classes.Search}
+                type="search"
+                placeholder="Search"
+                value={searchText}
+                onChange={handleSearchChange} />
+            <button className={classes.LogOut} onClick={handleLogOut}>
+                <FaSignOutAlt />
+                Log out
+            </button>
+
+        </nav>
 
     )
 }

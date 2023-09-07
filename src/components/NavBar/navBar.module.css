@@ -21,10 +21,7 @@
     margin-top: 20px;
     margin-left: 20px;
     
-    
-  
-    
-  }
+    }
   .LogOut{
     background-color:rgb(54,69,79); 
     color: lightblue;
@@ -69,9 +66,139 @@
     background-color: rgb(54,69,79);
     color: lightblue;
     margin-top: 30px;
-    margin-right: 200px;
+    margin-right: 270px;  
+}
+@media screen and (max-width: 1024px)
+{
+  .logo{
     
+    width: 100px;
+    height: 60px;
+    background-image: url(https://sylhet.wordcamp.org/2023/files/2023/04/WPDeveloper-e1683809335219.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 20px;
+    margin-left: 20px;
     
+    }
+  .div5{
+    width: 400px;
+    background-size: cover;
+    display: flex;
+    justify-content: start;
+  }
+  .Search{
+    width: 300px;
+    height: 40px;
+    background-color: rgb(54,69,79);
+    color: lightblue;
+    margin-top: 30px;
+    margin-right: 150px;  
+}
+.Home{
+  margin-left: 20px;
+  margin-top: 60px;
+  color: lightblue;
+  background-color: rgb(54,69,79);;
+  border: none;
+  font-size: 16px;
+  height: 40px;
+}
+.Home:hover{
+  color: white;
+  transition: 1s;
+}
+.About{
+  margin-left: 20px;
+  margin-top: 60px;
+  color: lightblue;
+  background-color:  rgb(54,69,79);;
+  border: none;
+  font-size: 16px;
+  height: 40px;
+  
+}
+.About:hover{
+  color: white;
+  transition: 1s;
+}
+.LogOut{
+  background-color:rgb(54,69,79); 
+  color: lightblue;
+  font-size: 15px;
+  height: 40px;
+  margin-top: 55px;
+  border: none;
+  margin-right: 20px;
+  
+ }
+  
+}
+@media screen and (max-width: 770px)
+{
+  .div5{
+    width: 400px;
+    background-size: cover;
+    display: flex;
+    justify-content: start;
+  }
+  .Search{
+    width: 200px;
+    height: 40px;
+    background-color: rgb(54,69,79);
+    color: lightblue;
+    margin-top: 30px;
+    margin-right: 200px;  
+}
+.Home{
+  margin-left: 20px;
+  margin-top: 50px;
+  color: lightblue;
+  background-color: rgb(54,69,79);;
+  border: none;
+  font-size: 16px;
+  height: 40px;
+}
+.Home:hover{
+  color: white;
+  transition: 1s;
+}
+.About{
+  margin-left: 20px;
+  margin-top: 50px;
+  color: lightblue;
+  background-color:  rgb(54,69,79);;
+  border: none;
+  font-size: 16px;
+  height: 40px;
+  
+}
+.About:hover{
+  color: white;
+  transition: 1s;
+}
+.LogOut{
+  background-color:rgb(54,69,79); 
+  color: lightblue;
+  font-size: 10px;
+  height: 40px;
+  margin-top: 55px;
+  border: none;
+  margin-right: 10px;
+  width: 100px;
+  
+ }
+ .logo{
+    
+  width: 70px;
+  height: 60px;
+  background-image: url(https://sylhet.wordcamp.org/2023/files/2023/04/WPDeveloper-e1683809335219.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  margin-top: 40px;
+  margin-left: 20px;
+  
+  }
 }
 
 

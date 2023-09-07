@@ -11,8 +11,8 @@
     display: flex;
     justify-content: space-around;
     background-color: rgb(54, 69, 79);
-    width: 50%;
-    height: 500px;
+    width: 50% !important;
+    height: 500px !important;
     margin: 0 auto;
     margin-top: 50px;
 
@@ -46,9 +46,7 @@
         width: 300px;
         background-color: lightgray;
         border: none;
-        
-    
-}
+ }
 
 
 .Submit {
@@ -86,4 +84,89 @@
 .Error4{
     color: red;
     margin-right: 90px;
+}
+@media screen and (max-width: 1024px)
+{
+    .content {
+        display: flex;
+        justify-content: space-around;
+        background-color: rgb(54, 69, 79);
+        width: 65% !important;
+        height: 500px !important;
+        margin: 0 auto;
+        margin-top: 50px;
+    
+    }
+}
+@media screen and (max-width: 2560px)
+{
+    .content {
+        display: flex;
+        justify-content: space-around;
+        background-color: rgb(54, 69, 79);
+        width: 40%;
+        height: 650px;
+        margin: 0 auto;
+        margin-top: 50px;
+    
+    }
+}
+@media screen and (max-width: 770px)
+{
+    .content {
+        display: flex;
+        justify-content: space-around;
+        background-color: rgb(54, 69, 79);
+        width: 70% !important;
+        height: 450px !important;
+        margin: 0 auto;
+        margin-top: 50px;
+    
+    }
+    .LogInInput {
+        border-radius: 30px;
+        padding: 15px;
+        width: 250px;
+        background-color: lightgray;
+        border: none;
+        margin: 10px;
+        margin-left: 50px;
+    }
+    
+    
+    .eye2{
+        display: flex;
+        margin: 6px;
+        border-radius: 30px;
+        width: 250px;
+        background-color: lightgray;
+        border: none;
+        margin-left: 50px;
+     }
+     .img {
+        width: 300px;
+        height: 100px;
+        background-image: url(https://sylhet.wordcamp.org/2023/files/2023/04/WPDeveloper-e1683809335219.png);
+        background-repeat: no-repeat;
+        background-size: contain;
+        margin-top: 100px;
+    }
+    .Submit {
+        border-radius: 30px;
+        width: 30%;
+        background-color: grey;
+        color: white;
+        margin-left: 120px;
+        margin-top: 10px;
+        height: 40px;
+        padding: 5px;
+    
+    }
+    .LogInh4 {
+        text-align: center;
+        padding-top: 10px;
+        width: 350px;
+    }
+     
+
 }

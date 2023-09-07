@@ -91,3 +91,14 @@
 .Error2{
     border: 3px solid red;
 }
+@media screen and (max-width: 1024px)
+{
+    .Ragister {
+        width: 600px;
+        height: 570px;
+        background-color: rgb(54, 69, 79);
+        margin: 0 auto;
+        margin-top: 20px;
+    
+    }
+}

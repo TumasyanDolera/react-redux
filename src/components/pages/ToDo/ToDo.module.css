@@ -21,6 +21,36 @@ body{
 .delete{
     width: 150px !important;
 }
+@media screen and (max-width: 1024px)
+{
+    .Add{
+        margin-left: 40%;
+        margin-top: 20px;
+        color: lightblue;
+        background-color: rgba(128, 128, 128, 0);
+        border: none;
+        font-size: 50px;
+        }
+    .Add:hover{
+        transition: 1s;
+        color: white;
+    }
+    
+}
+@media screen and (max-width: 430px)
+{
+    .Add{
+        margin-left: 40%;
+        margin-top: 20px;
+        color: lightblue;
+        background-color: rgba(128, 128, 128, 0);
+        border: none;
+        font-size: 10px;
+        }
+    .Add:hover{
+        transition: 1s;
+        color: white;
+    }}
 
 
   

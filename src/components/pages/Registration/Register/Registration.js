@@ -35,12 +35,16 @@ export default function Registration() {
         setErrors(Validation(RegData));
         const { name, surname, email, password, confirmPassword } = RegData;
         
+        
         if (!name || !surname || !email || !password || !confirmPassword) {
             return;
         }
         if (RegData.password !== RegData.confirmPassword) {
             return;
           }
+        if (!/\S+@\S+\.\S+/.test(RegData.email)){
+            return;
+        }
 
         submitRegData({ name, surname, email, password })
             .then((res => {
@@ -79,8 +83,8 @@ return (
                     <p className={classes.Error1}><BiSolidError icon={BiSolidError}/>{errors.email}</p>
                 }
                 <input className={`${classes.RegInput} ${errors.email ? classes.Error2 : " "}`}
-                    type="email"
-                    name="email"
+                    type ="email"
+                    name ="email"
                     value={RegData.email}
                     placeholder="Enter your Email"
                     onChange={handleRagisterChange} />
